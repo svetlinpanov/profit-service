@@ -1,0 +1,25 @@
+/* Styled components global styles causes flickering and reloading */
+
+@font-face {
+  font-family: 'RidleyGrotesk';
+  src: local('RidleyGrotesk'),
+    url(./assets/fonts/RidleyGrotesk/RidleyGrotesk-Regular.woff) format('woff');
+}
+@font-face {
+  font-family: 'RidleyGrotesk';
+  font-weight: 700;
+  src: local('RidleyGrotesk'),
+    url(./assets/fonts/RidleyGrotesk/RidleyGrotesk-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'RidleyGrotesk';
+  font-weight: 600;
+  src: local('RidleyGrotesk'),
+    url(./assets/fonts/RidleyGrotesk/RidleyGrotesk-Semibold.woff) format('woff');
+}
+@font-face {
+  font-family: 'RidleyGrotesk';
+  font-weight: 500;
+  src: local('RidleyGrotesk'),
+    url(./assets/fonts/RidleyGrotesk/RidleyGrotesk-Medium.woff) format('woff');
+}

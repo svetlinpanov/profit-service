@@ -32,7 +32,7 @@ const navigationCategories: NavigationCategory[] = [
       {
         name: 'Profit Calculator',
         icon: <PaidIcon />,
-        to: 'premium',
+        to: 'profit',
       },
     ],
   },

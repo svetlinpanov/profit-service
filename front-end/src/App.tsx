@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { QueryClientProvider } from 'react-query';
-import { CircularProgress, Box, CssBaseline } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 
 import { queryClient } from './config';
 import { DashPage } from './components/DashPage';
@@ -12,6 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ConfirmProvider } from 'material-ui-confirm';
 import { HomePage } from './pages/HomePage';
+import { CalculatorPage } from './pages/CalculatorPage';
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
               <Route element={<MainPage />}>
                   <Route path="/dash" element={<DashPage />}>
                     <Route index element={<HomePage />} />
+                    <Route path="profit/*" element={<CalculatorPage />} />
                   </Route>
                 </Route>
                 <Route index element={<Index />} />

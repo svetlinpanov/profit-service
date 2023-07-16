@@ -19,13 +19,11 @@ import {
   Grid,
   Avatar,
   AppBar,
-  ListItemIcon,
   MenuProps,
   Box,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
-  Notifications as NotificationsIcon,
 } from '@mui/icons-material';
 import { DashPageOutletContext } from './DashPage';
 
@@ -66,13 +64,6 @@ export const DashPageHeader: React.FC<DashPageHeaderProps> = ({ pageTitle, tabs 
               </IconButton>
             </Grid>
             <Grid item xs />
-            <Grid item>
-              <Tooltip title="Alerts • No alerts">
-                <IconButton color="inherit">
-                  <NotificationsIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
             <Grid item>
               <IconButton color="inherit" sx={{ p: 0.5 }} onClick={handleClickUserMenu}>
                 <Avatar alt="My Avatar" sx={{ bgcolor: 'white', color: 'text.secondary' }}>

@@ -7,11 +7,9 @@ export enum StockOperationType {
 
 export const stockOperation = z.object({
   id: z.string(),
+  symbol: z.string(),
   timestamp: z.date(),
   price: z.number(),
-  // quantity: z.number(),
-  // type: z.nativeEnum(StockOperationType),
-  symbol: z.string(),
 });
 
 export type StockOperation = z.infer<typeof stockOperation>;

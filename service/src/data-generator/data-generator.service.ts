@@ -7,9 +7,6 @@ import { v4 as uuid } from "uuid";
 export class DataGeneratorService {
   async createStockData(startDate: Date, endDate: Date) {
     const batchSize = 1000;
-    //const secondsInOneMonth = 60 * 60 * 24 * 30;
-    //const secondsInOneDay = 60 * 60 * 24;
-    //total seconds between startDate and endDate
     const secondsBetweenDates = (endDate.getTime() - startDate.getTime()) / 1000;
     const pages = secondsBetweenDates / batchSize;
     let totalCreated = 0;
@@ -32,7 +29,7 @@ export class DataGeneratorService {
       const stockOperation = {
         id: uuid(),
         timestamp: moment(startDate).add(i, "seconds").toDate(),
-        price: Math.round(Math.random() * 100) + 1,
+        price: Math.round(Math.random() * 1000),
         // quantity: Math.round(Math.random() * 100),
         // type:
         //   Math.round(Math.random()) === 1

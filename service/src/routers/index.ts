@@ -2,22 +2,12 @@ import { StockOperationController } from "@/controllers";
 import { injectable } from "inversify";
 import Router from "koa-router";
 
-// import {
-//   CategoryController,
-//   FollowerController,
-//   ReportController,
-//   ThreadController,
-//   ThreadRepliesController,
-//   UserController,
-//   VotingController,
-// } from "../controllers";
-
 @injectable()
 export class MainRouter {
   public readonly router: Router;
 
   constructor(private stockOperationController: StockOperationController) {
-    this.router = new Router({ prefix: "/profit/v1" });
+    this.router = new Router({ prefix: "/api/v1" });
     this.init();
   }
 
@@ -26,6 +16,10 @@ export class MainRouter {
       ctx.body = { status: 200, message: "ok" };
       ctx.status = 200;
     });
-    this.router.get("/stock", this.stockOperationController.getData);
+    this.router.get("/solution", this.stockOperationController.getMostProfitableSolution);
+    this.router.get(
+      "/solution/all",
+      this.stockOperationController.getAllProfitableSolution,
+    );
   }
 }

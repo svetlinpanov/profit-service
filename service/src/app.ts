@@ -19,7 +19,6 @@ export class App {
     private mainRouter: MainRouter,
     private dataGenerationRouter: DataGenerationRouter,
   ) {
-    // private v2Router: V2Router, // private threadRouter: ThreadRouter, // private mainRouter: MainRouter,
     this.app = new Koa();
     this.app.use(this.errorHandlerMiddleware);
     this.app.use(bodyParser());

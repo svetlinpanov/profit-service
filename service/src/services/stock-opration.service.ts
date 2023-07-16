@@ -10,20 +10,61 @@ export class StockOperationService {
         timestamp: { $gte: startDate, $lte: endDate },
       },
       { _id: 0, __v: 0 },
-    ).lean();
+    )
+      .sort({ timestamp: 1 })
+      .lean();
     if (!data) {
       throw new APIError(404, "No data found for the requested date range");
     }
     return data;
   }
 
-  public async getMostProfitableSolution(startDate: Date, endDate: Date) {
+  public async getMostProfitableSolution(startDate: Date, endDate: Date, amount: number) {
     const stockData = await this.getStockData(startDate, endDate);
-    const result = this.findSolution(stockData);
+    const allMaxSolutions = this.findSolutions(stockData);
+
+    const minDuration = Math.min(...allMaxSolutions.map(solution => solution.duration));
+    const minDurationSolution = allMaxSolutions.filter(
+      solution => solution.duration === minDuration,
+    );
+    return minDurationSolution.map(solution => {
+      return {
+        stockName: solution.minElement.symbol,
+        buyPrice: solution.minElement.price,
+        sellPrice: solution.maxElement.price,
+        startDate: solution.minElement.timestamp,
+        endDate: solution.maxElement.timestamp,
+        duration: solution.duration,
+        profit: solution.difference * amount,
+      };
+    });
+  }
+
+  public async getAllProfitableSolution(startDate: Date, endDate: Date, amount: number) {
+    const stockData = await this.getStockData(startDate, endDate);
+    const solutions = this.findSolutions(stockData);
+    const result = solutions
+      .map(solution => {
+        return {
+          stockName: solution.minElement.symbol,
+          buyPrice: solution.minElement.price,
+          sellPrice: solution.maxElement.price,
+          startDate: solution.minElement.timestamp,
+          endDate: solution.maxElement.timestamp,
+          duration: solution.duration,
+          profit: solution.difference * amount,
+        };
+      })
+      .sort((a, b) => a.duration - b.duration);
     return result;
   }
 
-  private findSolution(stockData: StockOperation[]) {
+  private findSolutions(stockData: StockOperation[]): {
+    minElement: StockOperation;
+    maxElement: StockOperation;
+    difference: number;
+    duration: number;
+  }[] {
     let maxDifference = -1;
     let minElement = stockData[0];
     let maxElement = stockData[0];
@@ -42,7 +83,8 @@ export class StockOperationService {
             minElement,
             maxElement,
             difference: currentDifference,
-            duration: maxElement.timestamp.getTime() - minElement.timestamp.getTime(),
+            duration:
+              (maxElement.timestamp.getTime() - minElement.timestamp.getTime()) / 1000,
           });
         }
         maxDifference = Math.max(maxDifference, currentDifference);
@@ -53,13 +95,6 @@ export class StockOperationService {
     const allMaxSolutions = solutions.filter(
       solution => solution.difference === maxDifference,
     );
-    if (allMaxSolutions.length === 1) {
-      return allMaxSolutions[0];
-    }
-    const minDuration = Math.min(...allMaxSolutions.map(solution => solution.duration));
-    const minDurationSolution = solutions.find(
-      solution => solution.duration === minDuration,
-    );
-    return minDurationSolution;
+    return allMaxSolutions;
   }
 }

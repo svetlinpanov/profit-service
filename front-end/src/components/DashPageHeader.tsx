@@ -4,16 +4,13 @@ import {
   useOutletContext,
   useResolvedPath,
   useMatch,
-  useNavigate,
 } from 'react-router-dom';
 
 import {
   Menu,
-  MenuItem,
   Tab,
   Tabs,
   Typography,
-  Tooltip,
   Toolbar,
   IconButton,
   Grid,
@@ -122,9 +119,6 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ open, onClose, onClick, anchorEl }) => {
-  const navigate = useNavigate();
-
-
 
   return (
     <Menu

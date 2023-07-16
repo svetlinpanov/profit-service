@@ -48,10 +48,7 @@ export class App {
           error instanceof SyntaxError
             ? error.message
             : "Internal Server Error",
-        // Add code and clientMessage if they exist
         ...(error.code && { code: error.code }),
-        ...(error.clientMessage && { clientMessage: error.clientMessage }),
-        ...(error.preventLogout && { preventLogout: error.preventLogout }),
       };
 
       ctx.app.emit("error", error, ctx);

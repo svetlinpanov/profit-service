@@ -13,7 +13,7 @@ export class StockOperationService {
     )
       .sort({ timestamp: 1 })
       .lean();
-    if (!data) {
+    if (data.length === 0 || !data) {
       throw new APIError(404, "No data found for the requested date range");
     }
     return data;

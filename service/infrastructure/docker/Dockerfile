@@ -9,5 +9,5 @@ RUN touch .env && chmod 600 .env
 
 RUN yarn
 
-EXPOSE 3031
+EXPOSE 3001
 CMD [ "npm", "start" ]

@@ -9,11 +9,11 @@ export class StockOperationController {
   constructor(private stockOperationService: StockOperationService) {}
 
   public getMostProfitableSolution: Middleware = async ctx => {
-    const { query } = validateRequest(ctx, {
-      query: requestSchema,
+    const { body } = validateRequest(ctx, {
+      body: requestSchema,
     });
-    const { startDate, endDate, amount } = query;
-    console.log(query);
+    const { startDate, endDate, amount } = body;
+    console.log(body);
     const result = await this.stockOperationService.getMostProfitableSolution(
       new Date(startDate),
       new Date(endDate),
@@ -23,11 +23,11 @@ export class StockOperationController {
   };
 
   public getAllProfitableSolution: Middleware = async ctx => {
-    const { query } = validateRequest(ctx, {
-      query: requestSchema,
+    const { body } = validateRequest(ctx, {
+      body: requestSchema,
     });
-    const { startDate, endDate, amount } = query;
-    console.log(query);
+    const { startDate, endDate, amount } = body;
+    console.log(body);
     const result = await this.stockOperationService.getAllProfitableSolution(
       new Date(startDate),
       new Date(endDate),

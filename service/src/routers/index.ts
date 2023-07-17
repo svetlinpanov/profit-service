@@ -16,8 +16,11 @@ export class MainRouter {
       ctx.body = { status: 200, message: "ok" };
       ctx.status = 200;
     });
-    this.router.get("/solution", this.stockOperationController.getMostProfitableSolution);
-    this.router.get(
+    this.router.post(
+      "/solution",
+      this.stockOperationController.getMostProfitableSolution,
+    );
+    this.router.post(
       "/solution/all",
       this.stockOperationController.getAllProfitableSolution,
     );
